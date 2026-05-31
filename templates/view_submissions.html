@@ -97,6 +97,28 @@
             font-weight: bold;
             color: #e74c3c;
         }
+
+        .btn-back-dashboard {
+            padding: 10px 20px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px auto;
+           
+        }
+
+        .btn-back-dashboard:hover {
+            background-color: #224e99;
+        }
+
+        .button-container {
+            text-align: center;
+        }
     </style>
     <script>
        function checkPlagiarism(filename, submissionId) {
@@ -138,7 +160,7 @@
                             <td>{{ submission.submission_date }}</td>
                             <td>
                                 {% if submission.submission_filename %}
-                                    <a href="{{ url_for('view_file', filename=submission.submission_filename) }}" target="_blank" class="btn-download">
+                                    <a href="{{ url_for('view_file', submission_id=submission.id) }}" target="_blank" class="btn-download">
                                         View File
                                     </a>
                                 {% else %}
@@ -148,7 +170,7 @@
                             
 
                             <td>
-                                <a href="{{ url_for('check_plagiarism', filename=submission['submission_filename'].split('/')[-1]) }}" class="btn btn-warning">Check Plagiarism</a>
+                                <a href="{{ url_for('check_plagiarism', submission_id=submission.id) }}" class="btn-plagiarism">Check Plagiarism</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -159,6 +181,9 @@
                 {% endif %}
             </tbody>
         </table>
+        <div class="button-container">
+            <a href="{{ url_for('teacher_dashboard') }}" class="btn-back-dashboard">Back to Dashboard</a>
+        </div>
     </div>
 
 </body>

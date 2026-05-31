@@ -11,6 +11,16 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
+import os
+
+def initialize_database():
+    if not os.path.exists('database.db'):
+        os.system('python load_student.py')
+        os.system('python load_teachers.py')
+        os.system('python load_assignments.py')
+        os.system('python load_submissions.py')
+
+initialize_database()
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
 def get_db_connection():
     conn = sqlite3.connect('database.db')
